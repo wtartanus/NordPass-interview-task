@@ -3,6 +3,7 @@ import {IItem} from "~/services/getUserItems";
 import ItemIcon from './components/ItemIcon';
 import updateItem from '../../../../services/updateItem';
 import Modal from 'react-modal';
+import userItemsProvider from '../../useItemsProvider';
 
 import './list-style.scss';
 
@@ -14,9 +15,13 @@ interface IUpdateModal {
   item: IItem;
 }
 
+Modal.setAppElement('#app');
+
 const UpdateModal: FC<IUpdateModal> = ({ item }) => {
   const [showModal, setShowModal] = useState(false);
   const [newPass, setNewPass] = useState('');
+
+  const { refreshUserItems } = userItemsProvider();
 
   return (
     <>
@@ -43,7 +48,8 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
               password: newPass,
             })
 
-            window.location.reload();
+            await refreshUserItems();
+            setShowModal(false);
           }}>Change</button>
           <button className="button ml-12px" onClick={() => {
             setNewPass('');
@@ -61,7 +67,7 @@ const List: FC<IList> = ({items}) => (
   <ul className="list">
     {
       items.map((item) => (
-        <li className="item">
+        <li key={item.title} className="item">
           <ItemIcon title={item.title}/>
           <div>
             <div className="title">

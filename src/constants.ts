@@ -11,3 +11,5 @@ export enum API {
   Items = 'api/items',
   User = 'api/user',
 }
+
+export const UNAUTHORIZED_STATUS = 401;

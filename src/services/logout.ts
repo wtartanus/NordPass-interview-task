@@ -1,20 +1,15 @@
 import {API} from '~/constants';
 
 import getUrl from '../utils/getUrl';
+import getAuthHeader from '~/utils/getAuthHeader';
 
 const logout = async () => {
-    const url = getUrl(API.Logout);
-
-    try {
-        await fetch(url, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`, 
-            },
-        });
-        localStorage.removeItem('token');
-    } catch (e) {
-        console.error(e.message);
-    }
+    await fetch(getUrl(API.Logout), {
+        method: 'POST',
+        headers: getAuthHeader(),
+    });
+    
+    localStorage.removeItem('token');
 };
 
 export default logout;

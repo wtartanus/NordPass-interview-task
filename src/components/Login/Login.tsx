@@ -28,37 +28,35 @@ const Login = () => {
     setIsLoading(false);
   };
 
+  if (isLoading) {
+    return <LoadingScreen/>;
+  }
+
   return (
     <div className="login-page">
-      {
-        isLoading ? (
-          <LoadingScreen/>
-        ) : (
-          <form className="login-form" onSubmit={handleSubmit}>
-            <h1 className="text-center">
-              Password Health
-            </h1>
-            <input
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-              placeholder="Username"
-              type="text"
-              className="input mt-52px"
-            />
-            <input
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="Password"
-              type="password"
-              className="input mt-24px"
-            />
-            <ErrorBlock error={errorMessage}/>
-            <button type="submit" className="button mt-24px">
-              Login
-            </button>
-          </form>
-        )
-      }
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h1 className="text-center">
+          Password Health
+        </h1>
+        <input
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+          placeholder="Username"
+          type="text"
+          className="input mt-52px"
+        />
+        <input
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          placeholder="Password"
+          type="password"
+          className="input mt-24px"
+        />
+        <ErrorBlock error={errorMessage}/>
+        <button type="submit" className="button mt-24px">
+          Login
+        </button>
+      </form>
     </div>
   )
 };

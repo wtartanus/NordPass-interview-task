@@ -23,12 +23,12 @@ const userItemsProvider = () => {
         push(Routes.Login);
         
       } else {
-      setErrorMessage(error.message);
+        setErrorMessage(error.message);
       }
     }
 
     setIsLoading(false);
-  }
+  };
 
   useEffect(() => {
     refreshUserItems();

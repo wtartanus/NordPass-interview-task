@@ -1,5 +1,7 @@
-import {API} from "~/constants";
+import {API, UNAUTHORIZED_STATUS} from "~/constants";
 import getUrl from "~/utils/getUrl";
+import getAuthHeader from '~/utils/getAuthHeader';
+import UnauthorizedError from '../errors/unauthorized';
 
 export interface IItem {
   title: string,
@@ -14,10 +16,12 @@ const getUserItems = async (userId?: string): Promise<Array<IItem>> => {
   });
 
   const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    }
+    headers: getAuthHeader(),
   });
+
+  if (response.status === UNAUTHORIZED_STATUS) {
+    throw new UnauthorizedError();
+  }
 
   const data = await response.json();
 

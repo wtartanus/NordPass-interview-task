@@ -1,5 +1,8 @@
 import {useEffect, useState} from 'react';
 import getUserItems, {IItem} from '../../services/getUserItems';
+import UnauthorizedError from '../../errors/unauthorized';
+import {Routes} from '~/constants';
+import {useHistory} from 'react-router-dom';
 
 const userItemsProvider = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,7 +17,14 @@ const userItemsProvider = () => {
 
       setItems(userItems);
     } catch (error) {
+      if (error instanceof UnauthorizedError) {
+        localStorage.removeItem('token');
+        const {push} = useHistory();
+        push(Routes.Login);
+        
+      } else {
       setErrorMessage(error.message);
+      }
     }
 
     setIsLoading(false);

@@ -42,6 +42,13 @@ export async function fetchSuccess(url, config) {
           }),
         }
       }
+      case 'test/api/logout': {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({}),
+        }
+      }
       default: {
         throw new Error(`Unhandled request: ${url}`)
       }

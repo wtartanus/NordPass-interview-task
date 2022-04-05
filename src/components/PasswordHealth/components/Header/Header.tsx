@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom';
 import {IItem} from "~/services/getUserItems";
 import logout from '../../../../services/logout';
 import {Routes} from '~/constants';
+import { useUserContext } from '../../../UserContext';
 
 
 import './header-style.scss';
@@ -13,10 +14,12 @@ interface IHeader {
 }
 
 const Header: FC<IHeader> = ({items, username}) => {
+  const {deleteData} = useUserContext();
   const {push} = useHistory();
 
   const processLogout = async () => {
     await logout();
+    deleteData();
     push(Routes.Login);
   }
 

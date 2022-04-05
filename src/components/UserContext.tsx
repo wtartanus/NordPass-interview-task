@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { API } from '~/constants';
 import getUrl from '~/utils/getUrl';
+import getAuthHeader from '~/utils/getAuthHeader';
 
 interface IUser {
-  updateUser: () => void;
   deleteData: () => void;
   errorMessage: string;
   isLoading: boolean;
@@ -13,7 +13,6 @@ interface IUser {
 }
 
 const UserContext = createContext<IUser>({
-  updateUser: () => {},
   deleteData: () => {},
   errorMessage: null,
   isLoading: true,
@@ -31,28 +30,28 @@ export const UserContextProvider = ({ children }) => {
   const [email, setEmail] = useState<string>(null);
   const [id, setId] = useState<string>(null);
 
-  const updateUser = async () => {
-    setErrorMessage(null);
-    setIsLoading(true);
+  useEffect(() => {
+    (async () => {
+      setErrorMessage(null);
+      setIsLoading(true);
 
-    try {
-      const response = await fetch(getUrl(API.User), {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        }
-      });
+      try {
+        const response = await fetch(getUrl(API.User), {
+          headers: getAuthHeader(),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      setUsername(data?.username);
-      setEmail(data?.email);
-      setId(data?.id);
-    } catch (error) {
-      setErrorMessage(error.message);
-    }
+        setUsername(data?.username);
+        setEmail(data?.email);
+        setId(data?.id);
+      } catch (error) {
+        setErrorMessage(error.message);
+      }
 
-    setIsLoading(false);
-  }
+      setIsLoading(false);
+    })();
+  }, []);
 
   const deleteData = () => {
     setErrorMessage(null);
@@ -62,12 +61,7 @@ export const UserContextProvider = ({ children }) => {
     setId(null);
   };
 
-  useEffect(() => {
-   updateUser();
-  }, []);
-
   const value = {
-    updateUser,
     deleteData,
     errorMessage,
     isLoading,

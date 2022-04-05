@@ -22,7 +22,6 @@ const PasswordHealth = () => {
     items,
     isLoading,
     errorMessage,
-    refreshUserItems,
   } = useItemsProvider();
 
   if (userProviderErrorMessage || errorMessage) {
@@ -39,17 +38,16 @@ const PasswordHealth = () => {
       <Filter items={items}/>
       <Switch>
         <Route exact path={Routes.PasswordHealth}>
-          <List items={items} refreshUserItems={refreshUserItems} />
+          <List items={items} />
         </Route>
         <Route path={Routes.Weak}>
-          {/* TODO: refreshUserItems can go inside list */}
-          <List items={items.filter(itemHasWeakPassword)} refreshUserItems={refreshUserItems} />
+          <List items={items.filter(itemHasWeakPassword)} />
         </Route>
         <Route path={Routes.Reused}>
-          <List items={items.filter((item) => itemHasReusedPassword(item, items))} refreshUserItems={refreshUserItems}/>
+          <List items={items.filter((item) => itemHasReusedPassword(item, items))}/>
         </Route>
         <Route path={Routes.Old}>
-          <List items={items.filter((item) => itemHasOldPassword(item))} refreshUserItems={refreshUserItems} />
+          <List items={items.filter((item) => itemHasOldPassword(item))} />
         </Route>
       </Switch>
     </div>

@@ -4,21 +4,23 @@ import ItemIcon from './components/ItemIcon';
 import updateItem from '../../../../services/updateItem';
 import Modal from 'react-modal';
 
+import useItemsProvider from './../../useItemsProvider';
+
 import './list-style.scss';
 
 interface IList {
   items: Array<IItem>,
-  refreshUserItems: () => void;
 }
 
 interface IUpdateModal {
   item: IItem;
-  onUpdate: () => void;
 }
 
-const UpdateModal: FC<IUpdateModal> = ({ item, onUpdate }) => {
+const UpdateModal: FC<IUpdateModal> = ({ item }) => {
   const [showModal, setShowModal] = useState(false);
   const [newPass, setNewPass] = useState('');
+
+  const {refreshUserItems} = useItemsProvider();
 
   return (
     <>
@@ -48,7 +50,7 @@ const UpdateModal: FC<IUpdateModal> = ({ item, onUpdate }) => {
 
             setNewPass('');
             setShowModal(false);
-            onUpdate();
+            refreshUserItems();
           }}>Change</button>
           <button className="button ml-12px" onClick={() => {
             setNewPass('');
@@ -62,7 +64,7 @@ const UpdateModal: FC<IUpdateModal> = ({ item, onUpdate }) => {
   );
 }
 
-const List: FC<IList> = ({items, refreshUserItems }) => (
+const List: FC<IList> = ({items }) => (
   <ul className="list">
     {
       items.map((item) => (
@@ -76,7 +78,7 @@ const List: FC<IList> = ({items, refreshUserItems }) => (
               {item.description}
             </div>
           </div>
-          <UpdateModal item={item} onUpdate={refreshUserItems} />
+          <UpdateModal item={item} />
         </li>
       ))
     }

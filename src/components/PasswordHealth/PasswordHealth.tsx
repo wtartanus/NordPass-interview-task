@@ -25,10 +25,6 @@ const PasswordHealth = () => {
     refreshUserItems,
   } = useItemsProvider();
 
-  if (isLoading || userDataIsLoading) {
-    return <LoadingScreen/>
-  }
-
   if (userProviderErrorMessage || errorMessage) {
     return <ErrorBlock error={userProviderErrorMessage || errorMessage}/>
   }
@@ -46,6 +42,7 @@ const PasswordHealth = () => {
           <List items={items} refreshUserItems={refreshUserItems} />
         </Route>
         <Route path={Routes.Weak}>
+          {/* TODO: refreshUserItems can go inside list */}
           <List items={items.filter(itemHasWeakPassword)} refreshUserItems={refreshUserItems} />
         </Route>
         <Route path={Routes.Reused}>

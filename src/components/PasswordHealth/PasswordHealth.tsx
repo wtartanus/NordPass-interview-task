@@ -33,6 +33,10 @@ const PasswordHealth = () => {
     return <ErrorBlock error={userProviderErrorMessage || errorMessage}/>
   }
 
+  if (isLoading || userDataIsLoading) {
+    return <LoadingScreen/>
+  }
+
   return (
     <div className="container">
       <Header items={items} username={username} />

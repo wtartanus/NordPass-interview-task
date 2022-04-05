@@ -8,6 +8,7 @@ const userItemsProvider = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<String>();
   const [items, setItems] = useState<Array<IItem>>([]);
+  const {push} = useHistory();
 
   const refreshUserItems = async () => {
     setIsLoading(true);
@@ -19,9 +20,7 @@ const userItemsProvider = () => {
     } catch (error) {
       if (error instanceof UnauthorizedError) {
         localStorage.removeItem('token');
-        const {push} = useHistory();
         push(Routes.Login);
-        
       } else {
         setErrorMessage(error.message);
       }

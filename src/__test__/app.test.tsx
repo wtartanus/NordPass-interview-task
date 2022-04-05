@@ -3,11 +3,8 @@
  */
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react';
-import {createMemoryHistory} from 'history'
-import React from 'react'
-import {Router} from 'react-router-dom'
 
-import { mockFetch } from '../__mocks__/fetchSuccess';
+import { fetchSuccess } from '../__mocks__/fetchSuccess';
 import App from '../App';
 
 describe('App component', () => {
@@ -19,7 +16,7 @@ describe('App component', () => {
 
     test('should render password health when user is logged', async () => {
         global.Storage.prototype.getItem = jest.fn().mockImplementation(() => 'token');
-        global.fetch = jest.fn().mockImplementation(mockFetch);
+        global.fetch = jest.fn().mockImplementation(fetchSuccess);
 
         render(<App />);
 

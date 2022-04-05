@@ -1,4 +1,4 @@
-export async function mockFetch(url, config) {
+export async function fetchSuccess(url, config) {
     switch (url) {
       case 'test/api/items': {
         return {
@@ -30,6 +30,15 @@ export async function mockFetch(url, config) {
             username: "admin",
             email: "user@organization.com",
             password: "admin"
+          }),
+        }
+      }
+      case 'test/api/login': {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({
+              token: 'token',
           }),
         }
       }

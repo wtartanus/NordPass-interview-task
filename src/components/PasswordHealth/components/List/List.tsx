@@ -16,8 +16,6 @@ interface IUpdateModal {
   onUpdate: () => void;
 }
 
-Modal.setAppElement('#app');
-
 const UpdateModal: FC<IUpdateModal> = ({ item, onUpdate }) => {
   const [showModal, setShowModal] = useState(false);
   const [newPass, setNewPass] = useState('');
@@ -31,6 +29,7 @@ const UpdateModal: FC<IUpdateModal> = ({ item, onUpdate }) => {
         className="modal"
         isOpen={showModal}
         onRequestClose={() => setShowModal(false)}
+        appElement={document.getElementById('app')}
         contentLabel="Example Modal"
       >
         <h1>Update Password</h1>

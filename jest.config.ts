@@ -10,6 +10,13 @@ const config: Config.InitialOptions = {
       isolatedModules: true,
     },
   },
+  setupFiles: [
+    "<rootDir>/src/__mocks__/setEnvVars.ts"
+  ],
+  moduleNameMapper: {
+    '^~/(.*)$': '<rootDir>/src/$1',
+    "\\.(css|scss)$": 'identity-obj-proxy'
+  },
 };
 
 export default config;

@@ -22,7 +22,6 @@ const UpdateModal: FC<IUpdateModal> = ({ item, onChange }) => {
   const [showModal, setShowModal] = useState(false);
   const [newPass, setNewPass] = useState('');
 
-
   return (
     <>
       <button className="update" onClick={() => setShowModal(true)}>

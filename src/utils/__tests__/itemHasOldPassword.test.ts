@@ -1,5 +1,5 @@
+import { IItem } from '~/services/getUserItems';
 import itemHasOldPassword from '../itemHasOldPassword';
-import { IItem } from '../../services/getUserItems';
 
 describe('should return true if password is too old', () => {
   test.each([

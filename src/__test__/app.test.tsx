@@ -8,19 +8,19 @@ import { fetchSuccess } from '../__mocks__/fetchSuccess';
 import App from '../App';
 
 describe('App component', () => {
-    test('should render login page if user isn\'t logged', () => {
-        const { container } = render(<App />);
+  test('should render login page if user isn\'t logged', () => {
+    const { container } = render(<App />);
 
-        expect(container.firstChild).toHaveClass('login-page');
-    });
+    expect(container.firstChild).toHaveClass('login-page');
+  });
 
-    test('should render password health when user is logged', async () => {
-        global.Storage.prototype.getItem = jest.fn().mockImplementation(() => 'token');
-        global.fetch = jest.fn().mockImplementation(fetchSuccess);
+  test('should render password health when user is logged', async () => {
+    global.Storage.prototype.getItem = jest.fn().mockImplementation(() => 'token');
+    global.fetch = jest.fn().mockImplementation(fetchSuccess);
 
-        render(<App />);
+    render(<App />);
 
-        expect(await screen.findByText('Create new complex passwords to protect your accounts'))
-            .toBeInTheDocument();
-    });
+    expect(await screen.findByText('Create new complex passwords to protect your accounts'))
+        .toBeInTheDocument();
+  });
 });

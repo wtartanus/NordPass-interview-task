@@ -40,7 +40,8 @@ const UpdateModal: FC<IUpdateModal> = ({ item, onChange }) => {
           placeholder="new password"
           className="input"
           value={newPass}
-          onChange={(event) => setNewPass(event.target.value)} 
+          onChange={(event) => setNewPass(event.target.value)}
+          autoFocus
         />
         <div className="pt-12px text-center">
           <button className="button" onClick={async () => {

@@ -21,11 +21,12 @@ const Login = () => {
 
     try {
       await login(username, password);
+      setIsLoading(false);
       push(Routes.PasswordHealth);
     } catch (error) {
+      setIsLoading(false);
       setErrorMessage(error.message);
     }
-    setIsLoading(false);
   };
 
   if (isLoading) {

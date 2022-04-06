@@ -17,7 +17,9 @@ const userItemsProvider = () => {
       const userItems = await getUserItems();
 
       setItems(userItems);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       if (error instanceof UnauthorizedError) {
         localStorage.removeItem('token');
         push(Routes.Login);
@@ -25,8 +27,6 @@ const userItemsProvider = () => {
         setErrorMessage(error.message);
       }
     }
-
-    setIsLoading(false);
   };
 
   useEffect(() => {

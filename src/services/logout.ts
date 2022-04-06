@@ -5,12 +5,12 @@ import getAuthHeader from '~/utils/getAuthHeader';
 import request from './request';
 
 const logout = async () => {
-    await request(
-        getUrl(API.Logout),
-        getAuthHeader(),
-    );
+  await request(
+    getUrl(API.Logout),
+    getAuthHeader(),
+  );
     
-    localStorage.removeItem('token');
+  localStorage.removeItem('token');
 };
 
 export default logout;

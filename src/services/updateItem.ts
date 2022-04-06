@@ -6,10 +6,10 @@ import { IItem } from "./getUserItems";
 import request from './request';
 
 const updateItem = (item: IItem) => {
-    const headers = getAuthHeader();
-    headers.append('Content-Type', 'application/json');
+  const headers = getAuthHeader();
+  headers.append('Content-Type', 'application/json');
 
-    return request(getUrl(API.Items), headers, JSON.stringify(item));
+  return request(getUrl(API.Items), headers, JSON.stringify(item));
 };
 
 export default updateItem;

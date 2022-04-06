@@ -1,7 +1,7 @@
 const getAuthHeader = () => (
-    new Headers({
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-    })
+  new Headers({
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  })
 );
 
 export default getAuthHeader;

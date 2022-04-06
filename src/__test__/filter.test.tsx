@@ -70,7 +70,11 @@ const old = [
         
         render(
             <Router history={history}>
-                <Filter items={[...weak, ...reused, ...old]} />
+                <Filter
+                  weakCount={weak.length}
+                  reusedCount={reused.length}
+                  oldCount={old.length}
+                />
             </Router>
         );
 
@@ -86,7 +90,11 @@ const old = [
         
         render(
             <Router history={history}>
-                <Filter items={[]} />
+                <Filter    
+                  weakCount={0}
+                  reusedCount={0}
+                  oldCount={0}
+                />
             </Router>
         );
 

@@ -1,7 +1,9 @@
 import {SyntheticEvent, useState} from 'react';
 import {useHistory} from 'react-router-dom';
+
 import {Routes} from '~/constants';
 import login from '~/services/login';
+
 import ErrorBlock from '../ErrorBlock/ErrorBlock';
 import LoadingScreen from '../LoadingScreen';
 

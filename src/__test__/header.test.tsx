@@ -19,7 +19,7 @@ import Header from '../components/PasswordHealth/components/Header/Header';
         
         render(
             <Router history={history}>
-                <Header items={[]} username='test' />
+                <Header vulnerableItemsCount={0} username='test' />
             </Router>
         );
 

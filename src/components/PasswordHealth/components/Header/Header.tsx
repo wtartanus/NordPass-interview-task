@@ -1,19 +1,19 @@
 import {FC} from 'react';
 import {useHistory} from 'react-router-dom';
-import {IItem} from "~/services/getUserItems";
-import logout from '../../../../services/logout';
-import {Routes} from '~/constants';
-import { useUserContext } from '../../../UserContext';
 
+import {Routes} from '~/constants';
+import logout from '~/services/logout';
+
+import { useUserContext } from '../../../UserContext';
 
 import './header-style.scss';
 
 interface IHeader {
-  items: Array<IItem>;
+  vulnerableItemsCount: number;
   username: string;
 }
 
-const Header: FC<IHeader> = ({items, username}) => {
+const Header: FC<IHeader> = ({vulnerableItemsCount, username}) => {
   const {deleteData} = useUserContext();
   const {push} = useHistory();
 
@@ -28,7 +28,7 @@ const Header: FC<IHeader> = ({items, username}) => {
       <div className="user-section">
         <button onClick={processLogout}>{`Logout ${username}`}</button>
       </div>
-      <h1>{`${items.length} Items are vulnerable`}</h1>
+      <h1>{`${vulnerableItemsCount} Items are vulnerable`}</h1>
       <span>Create new complex passwords to protect your accounts</span>
     </div>
   )

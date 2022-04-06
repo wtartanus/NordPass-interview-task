@@ -1,4 +1,5 @@
 import {FC, memo} from 'react';
+
 import './error-block-style.scss';
 
 interface IErrorBlock {

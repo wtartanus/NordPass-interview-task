@@ -1,8 +1,10 @@
 import {useEffect, useState} from 'react';
-import getUserItems, {IItem} from '../../services/getUserItems';
-import UnauthorizedError from '../../errors/unauthorized';
-import {Routes} from '~/constants';
 import {useHistory} from 'react-router-dom';
+
+import {Routes} from '~/constants';
+import UnauthorizedError from '~/errors/unauthorized';
+import getUserItems, {IItem} from '~/services/getUserItems';
+
 
 const userItemsProvider = () => {
   const [isLoading, setIsLoading] = useState(true);

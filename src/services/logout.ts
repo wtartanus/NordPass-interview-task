@@ -1,13 +1,14 @@
 import {API} from '~/constants';
-
-import getUrl from '../utils/getUrl';
+import getUrl from '~/utils/getUrl';
 import getAuthHeader from '~/utils/getAuthHeader';
 
+import request from './request';
+
 const logout = async () => {
-    await fetch(getUrl(API.Logout), {
-        method: 'POST',
-        headers: getAuthHeader(),
-    });
+    await request(
+        getUrl(API.Logout),
+        getAuthHeader(),
+    );
     
     localStorage.removeItem('token');
 };

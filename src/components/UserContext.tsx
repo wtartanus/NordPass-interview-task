@@ -1,9 +1,8 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { API } from '~/constants';
-import getUrl from '~/utils/getUrl';
-import getAuthHeader from '~/utils/getAuthHeader';
 
-interface IUser {
+import getUser from '~/services/getUser';
+
+interface IUserContext {
   deleteData: () => void;
   errorMessage: string;
   isLoading: boolean;
@@ -12,7 +11,7 @@ interface IUser {
   id: string;
 }
 
-const UserContext = createContext<IUser>({
+const UserContext = createContext<IUserContext>({
   deleteData: () => {},
   errorMessage: null,
   isLoading: true,
@@ -36,11 +35,7 @@ export const UserContextProvider = ({ children }) => {
       setIsLoading(true);
 
       try {
-        const response = await fetch(getUrl(API.User), {
-          headers: getAuthHeader(),
-        });
-
-        const data = await response.json();
+        const data = await getUser();
 
         setUsername(data?.username);
         setEmail(data?.email);

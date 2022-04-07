@@ -11,6 +11,8 @@ const PublicRoute: FC<RouteProps> = ({
 
   if (token) {
     push(Routes.PasswordHealth);
+
+    return null;
   }
 
   return <Route path={path} component={component}/>

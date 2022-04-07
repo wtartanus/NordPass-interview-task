@@ -1,5 +1,8 @@
 import {API} from "~/constants";
 import getUrl from "~/utils/getUrl";
+import getAuthHeader from '~/utils/getAuthHeader';
+
+import request, { HttpMethod } from './request';
 
 export interface IItem {
   title: string,
@@ -13,15 +16,9 @@ const getUserItems = async (userId?: string): Promise<Array<IItem>> => {
     userId,
   });
 
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    }
-  });
+  const { items } = await request(url, getAuthHeader(), null, HttpMethod.GET);
 
-  const data = await response.json();
-
-  return data.items;
+  return items;
 };
 
 export default getUserItems;

@@ -1,16 +1,15 @@
 import { API } from "~/constants";
 import getUrl from "~/utils/getUrl";
-import { IItem } from "./getUserItems";
+import getAuthHeader from '~/utils/getAuthHeader';
 
-const updateItem = (item: IItem) => (
-    fetch(getUrl(API.Items), {
-        method: "POST",
-        body: JSON.stringify(item),
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-        }
-    })
-)
+import { IItem } from "./getUserItems";
+import request from './request';
+
+const updateItem = (item: IItem) => {
+  const headers = getAuthHeader();
+  headers.append('Content-Type', 'application/json');
+
+  return request(getUrl(API.Items), headers, JSON.stringify(item));
+};
 
 export default updateItem;

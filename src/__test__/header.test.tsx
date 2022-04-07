@@ -23,7 +23,7 @@ import Header from '../components/PasswordHealth/components/Header/Header';
       </Router>
     );
 
-    userEvent.click(await screen.findByText('Logout test'));
+    await userEvent.click(await screen.findByText('Logout test'));
 
     await waitFor(() => expect(history.location.pathname).toBe('/login'));
   });

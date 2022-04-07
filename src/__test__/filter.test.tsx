@@ -68,7 +68,7 @@ describe('Filter component', () => {
     
     const history = createMemoryHistory();
     
-    render(
+    const { queryByText } = render(
         <Router history={history}>
             <Filter
               weakCount={weak.length}
@@ -78,9 +78,9 @@ describe('Filter component', () => {
         </Router>
     );
 
-    expect(await screen.findByText(`Weak (${weak.length})`)).toBeInTheDocument();
-    expect(await screen.findByText(`Reused (${reused.length})`)).toBeInTheDocument();
-    expect(await screen.findByText(`Old (${old.length})`)).toBeInTheDocument();
+    expect(queryByText(`Weak (${weak.length})`)).toBeInTheDocument();
+    expect(queryByText(`Reused (${reused.length})`)).toBeInTheDocument();
+    expect(queryByText(`Old (${old.length})`)).toBeInTheDocument();
   });
 
   test('should redirect on tab click', async () => {
@@ -88,7 +88,7 @@ describe('Filter component', () => {
     
     const history = createMemoryHistory();
     
-    render(
+    const { queryByText } = render(
       <Router history={history}>
         <Filter    
           weakCount={0}
@@ -98,7 +98,8 @@ describe('Filter component', () => {
       </Router>
     );
 
-    userEvent.click(await screen.findByText('Old (0)'));
+    await userEvent.click(queryByText('Old (0)'));
+
     await waitFor(() => expect(history.location.pathname).toBe('/items/old'));
   });
 });

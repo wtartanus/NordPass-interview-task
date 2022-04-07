@@ -23,9 +23,9 @@ describe('Login component', () => {
       </Router>
     );
 
-    userEvent.type(screen.getByPlaceholderText('Username'), 'test');
-    userEvent.type(screen.getByPlaceholderText('Password'), 'test');
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.type(screen.getByPlaceholderText('Username'), 'test');
+    await userEvent.type(screen.getByPlaceholderText('Password'), 'test');
+    await userEvent.click(screen.getByRole('button'));
 
     await waitFor(() => expect(history.location.pathname).toBe('/items'))
   });
@@ -41,9 +41,9 @@ describe('Login component', () => {
       </Router>
     );
 
-    userEvent.type(screen.getByPlaceholderText('Username'), 'test');
-    userEvent.type(screen.getByPlaceholderText('Password'), 'test');
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.type(screen.getByPlaceholderText('Username'), 'test');
+    await userEvent.type(screen.getByPlaceholderText('Password'), 'test');
+    await userEvent.click(screen.getByRole('button'));
 
     expect(await screen.findByText('You have entered an invalid username or password'))
         .toBeInTheDocument();

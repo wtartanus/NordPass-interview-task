@@ -10,12 +10,12 @@ import './list-style.scss';
 
 interface IList {
   items: Array<IItem>,
-  refreshUserItems: () => Promise<any>,
+  refreshUserItems: () => Promise<void>,
 }
 
 interface IUpdateModal {
   item: IItem;
-  onChange: () => Promise<any>;
+  onChange: () => Promise<void>;
 }
 
 const UpdateModal: FC<IUpdateModal> = ({ item, onChange }) => {

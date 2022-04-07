@@ -1,6 +1,3 @@
-/**
-* @jest-environment jsdom
-*/
 import '@testing-library/jest-dom'
 import { Router } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
